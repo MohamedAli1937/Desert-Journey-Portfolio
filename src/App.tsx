@@ -1,88 +1,117 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { FiSun, FiMoon } from 'react-icons/fi';
+import DesertCanvas from './components/DesertCanvas';
 import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
 import Blog from './components/Blog';
 import Contact from './components/Contact';
-import ThemeToggle from './components/ThemeToggle';
-import Logo from './components/Logo';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const sections = [
+  { id: 'hero', label: '01 Home' },
+  { id: 'about', label: '02 About' },
+  { id: 'projects', label: '03 Projects' },
+  { id: 'blog', label: '04 Blog' },
+  { id: 'contact', label: '05 Contact' },
+];
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('about');
+  const [activeSection, setActiveSection] = useState(0);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const saved = localStorage.getItem('theme');
+    return saved ? saved === 'dark' : true;
+  });
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const revealObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -20px 0px' }
-    );
+    if (isDarkMode) {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [isDarkMode]);
+  useEffect(() => {
+    const panels = gsap.utils.toArray<HTMLElement>('.desert-section');
 
-    const revealEls = document.querySelectorAll('.reveal, .reveal-children');
-    revealEls.forEach((el) => revealObserver.observe(el));
+    panels.forEach((panel, i) => {
+      ScrollTrigger.create({
+        trigger: panel,
+        start: 'top center',
+        end: 'bottom center',
+        onEnter: () => setActiveSection(i),
+        onEnterBack: () => setActiveSection(i),
+      });
+
+      gsap.fromTo(
+        panel.querySelectorAll('.section-content > *'),
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.12,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: panel,
+            start: 'top 60%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+    });
 
     return () => {
-      revealObserver.disconnect();
+      ScrollTrigger.getAll().forEach((t) => t.kill());
     };
-  }, [activeTab]);
+  }, []);
+
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
-    <div className="app-layout">
-      <div className="logo-container">
-        <Logo />
-      </div>
+    <div className="desert-world" ref={containerRef}>
+      <DesertCanvas />
 
-      <div className="theme-toggle-container">
-        <ThemeToggle />
-      </div>
-
-      <Hero compact={activeTab !== 'home'} setActiveTab={setActiveTab} />
-
-      <nav className="tab-navigation">
-        {['about', 'projects', 'blog', 'contact'].map((tab) => (
-          <button
-            key={tab}
-            className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
-            onClick={() => {
-              setActiveTab(tab);
-              setTimeout(() => {
-                document
-                  .querySelector('.tab-navigation')
-                  ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }, 100);
-            }}
-          >
-            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+      {/* Floating Navbar */}
+      <nav className="desert-nav">
+        <div className="nav-container">
+          <div className="nav-logo" onClick={() => scrollTo('hero')} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+            <img src="/logo.svg" alt="Logo" style={{ width: '28px', height: '28px' }} />
+            <div>Mohamed <span>Ali</span></div>
+          </div>
+          <div className="nav-links">
+            {sections.map((sec, i) => {
+              const [num, ...rest] = sec.label.split(' ');
+              return (
+                <button 
+                  key={sec.id} 
+                  className={`nav-link ${activeSection === i ? 'nav-link--active' : ''}`}
+                  onClick={() => scrollTo(sec.id)}
+                >
+                  <span className="nav-link__num">{num}</span> {rest.join(' ')}
+                </button>
+              );
+            })}
+          </div>
+          <button className="theme-toggle" onClick={() => setIsDarkMode(!isDarkMode)}>
+            {isDarkMode ? <FiSun /> : <FiMoon />}
           </button>
-        ))}
+        </div>
       </nav>
 
-      <main className="tab-content transition-container">
-        {activeTab === 'about' && (
-          <div className="fade-in">
-            <About />
-          </div>
-        )}
-        {activeTab === 'projects' && (
-          <div className="fade-in">
-            <Projects />
-          </div>
-        )}
-        {activeTab === 'blog' && (
-          <div className="fade-in">
-            <Blog />
-          </div>
-        )}
-        {activeTab === 'contact' && (
-          <div className="fade-in">
-            <Contact />
-          </div>
-        )}
-      </main>
+      <Hero isDarkMode={isDarkMode} />
+      <About isDarkMode={isDarkMode} />
+      <Projects isDarkMode={isDarkMode} />
+      <Blog isDarkMode={isDarkMode} />
+      <Contact isDarkMode={isDarkMode} />
     </div>
   );
 }
