@@ -1,6 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 
-function Star({ cx, cy, r, delay }: { cx: number; cy: number; r: number; delay: number }) {
+function Star({
+  cx,
+  cy,
+  r,
+  delay,
+}: {
+  cx: number;
+  cy: number;
+  r: number;
+  delay: number;
+}) {
   return (
     <circle
       cx={cx}
@@ -27,7 +37,8 @@ export default function DesertSky() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const maxScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
       if (maxScroll > 0) {
         setScrollProgress(window.scrollY / maxScroll);
       }
@@ -54,10 +65,7 @@ export default function DesertSky() {
         ))}
       </svg>
 
-      <div
-        className="desert-sky__moon"
-        style={{ opacity: moonOpacity }}
-      >
+      <div className="desert-sky__moon" style={{ opacity: moonOpacity }}>
         <svg viewBox="0 0 100 100" width="120" height="120">
           <defs>
             <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
@@ -76,10 +84,7 @@ export default function DesertSky() {
         </svg>
       </div>
 
-      <div
-        className="desert-sky__sun"
-        style={{ opacity: sunOpacity }}
-      >
+      <div className="desert-sky__sun" style={{ opacity: sunOpacity }}>
         <div className="sun-core" />
         <div className="sun-glow" />
       </div>
@@ -141,7 +146,11 @@ function blendHex(a: string, b: string, t: number): string {
 
 function parseHex(hex: string): number[] {
   const h = hex.replace('#', '');
-  return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16)];
+  return [
+    parseInt(h.slice(0, 2), 16),
+    parseInt(h.slice(2, 4), 16),
+    parseInt(h.slice(4, 6), 16),
+  ];
 }
 
 function getStarOpacity(p: number): number {

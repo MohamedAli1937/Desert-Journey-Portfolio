@@ -12,11 +12,11 @@ import Contact from './components/Contact';
 gsap.registerPlugin(ScrollTrigger);
 
 const sections = [
-  { id: 'hero', label: '01 Home' },
-  { id: 'about', label: '02 About' },
-  { id: 'projects', label: '03 Projects' },
-  { id: 'blog', label: '04 Blog' },
-  { id: 'contact', label: '05 Contact' },
+  { id: 'hero', label: 'Home' },
+  { id: 'about', label: 'About' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'blog', label: 'Blog' },
+  { id: 'contact', label: 'Contact' },
 ];
 
 export default function App() {
@@ -83,32 +83,48 @@ export default function App() {
       {/* Floating Navbar */}
       <nav className="desert-nav">
         <div className="nav-container">
-          <div className="nav-logo" onClick={() => scrollTo('hero')} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-            <img src="/logo.svg" alt="Logo" style={{ width: '28px', height: '28px' }} />
-            <div>Mohamed <span>Ali</span></div>
+          <div
+            className="nav-logo"
+            onClick={() => scrollTo('hero')}
+            style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}
+          >
+            <img
+              src="/logo.svg"
+              alt="Logo"
+              style={{ width: '28px', height: '28px' }}
+            />
+            <div>
+              Mohamed <span>Ali</span>
+            </div>
           </div>
           <div className="nav-links">
-            {sections.map((sec, i) => {
-              const [num, ...rest] = sec.label.split(' ');
-              return (
-                <button 
-                  key={sec.id} 
-                  className={`nav-link ${activeSection === i ? 'nav-link--active' : ''}`}
-                  onClick={() => scrollTo(sec.id)}
-                >
-                  <span className="nav-link__num">{num}</span> {rest.join(' ')}
-                </button>
-              );
-            })}
+            {sections.map((sec, i) => (
+              <button
+                key={sec.id}
+                className={`nav-link ${activeSection === i ? 'nav-link--active' : ''}`}
+                onClick={() => scrollTo(sec.id)}
+              >
+                {sec.label}
+              </button>
+            ))}
           </div>
-          <button className="theme-toggle" onClick={() => setIsDarkMode(!isDarkMode)}>
+          <button
+            className="theme-toggle"
+            onClick={() => setIsDarkMode(!isDarkMode)}
+          >
             {isDarkMode ? <FiSun /> : <FiMoon />}
           </button>
         </div>
       </nav>
 
-      <Hero isDarkMode={isDarkMode} />
-      <About isDarkMode={isDarkMode} />
+      <Hero
+        isDarkMode={isDarkMode}
+        toggleTheme={() => setIsDarkMode(!isDarkMode)}
+      />
+      <About
+        isDarkMode={isDarkMode}
+        toggleTheme={() => setIsDarkMode(!isDarkMode)}
+      />
       <Projects isDarkMode={isDarkMode} />
       <Blog isDarkMode={isDarkMode} />
       <Contact isDarkMode={isDarkMode} />

@@ -31,7 +31,8 @@ export default function DesertCanvas() {
     window.addEventListener('resize', resize);
 
     const handleScroll = () => {
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const maxScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
       scrollRef.current = maxScroll > 0 ? window.scrollY / maxScroll : 0;
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -48,7 +49,10 @@ export default function DesertCanvas() {
     });
 
     const PARTICLE_COUNT = 90;
-    particlesRef.current = Array.from({ length: PARTICLE_COUNT }, createParticle);
+    particlesRef.current = Array.from(
+      { length: PARTICLE_COUNT },
+      createParticle
+    );
 
     const getParticleColor = (progress: number): string => {
       if (progress < 0.15) return '210, 200, 180';
@@ -79,7 +83,8 @@ export default function DesertCanvas() {
 
         const fadeIn = Math.min(p.life / 30, 1);
         const fadeOut = Math.max(1 - (p.life - p.maxLife + 50) / 50, 0);
-        const alpha = p.opacity * fadeIn * (p.life > p.maxLife - 50 ? fadeOut : 1);
+        const alpha =
+          p.opacity * fadeIn * (p.life > p.maxLife - 50 ? fadeOut : 1);
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
@@ -100,10 +105,6 @@ export default function DesertCanvas() {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="desert-canvas"
-      aria-hidden="true"
-    />
+    <canvas ref={canvasRef} className="desert-canvas" aria-hidden="true" />
   );
 }

@@ -6,7 +6,8 @@ export default function ParallaxDunes() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const maxScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
       if (maxScroll > 0) {
         setScrollProgress(window.scrollY / maxScroll);
       }
@@ -102,5 +103,9 @@ function lerpColor(a: string, b: string, t: number): string {
 
 function hexToRgb(hex: string): number[] {
   const h = hex.replace('#', '');
-  return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16)];
+  return [
+    parseInt(h.slice(0, 2), 16),
+    parseInt(h.slice(2, 4), 16),
+    parseInt(h.slice(4, 6), 16),
+  ];
 }

@@ -16,7 +16,13 @@ const AnimatedName = () => {
       }}
     >
       <svg viewBox="0 0 1000 140" className="animated-name-svg">
-        <text x="500" y="100" textAnchor="middle" className="animated-text" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+        <text
+          x="500"
+          y="100"
+          textAnchor="middle"
+          className="animated-text"
+          style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+        >
           Mohamed <tspan className="animated-text--accent">Ali</tspan>
         </text>
       </svg>
@@ -44,7 +50,45 @@ const StarLayer = ({ active }: { active: boolean }) => {
   );
 };
 
-export default function Hero({ isDarkMode }: { isDarkMode: boolean }) {
+const Campfire = ({
+  isDarkMode,
+  onClick,
+}: {
+  isDarkMode: boolean;
+  onClick: () => void;
+}) => {
+  return (
+    <div className="campfire-interactive-area" onClick={onClick}>
+      <div className="interactive-note">
+        {isDarkMode ? 'Turn OFF campfire' : 'Turn ON campfire'}
+      </div>
+    </div>
+  );
+};
+
+const LanternClicker = ({
+  isDarkMode,
+  onClick,
+}: {
+  isDarkMode: boolean;
+  onClick: () => void;
+}) => {
+  return (
+    <div className="lantern-interactive-area" onClick={onClick}>
+      <div className="interactive-note">
+        {isDarkMode ? 'Turn OFF lantern' : 'Turn ON lantern'}
+      </div>
+    </div>
+  );
+};
+
+export default function Hero({
+  isDarkMode,
+  toggleTheme,
+}: {
+  isDarkMode: boolean;
+  toggleTheme: () => void;
+}) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -59,27 +103,53 @@ export default function Hero({ isDarkMode }: { isDarkMode: boolean }) {
         src={heroDay}
         alt="Desert day sky"
         className="hero-layer hero-layer--bg"
-        style={{ objectFit: 'cover', width: '100%', height: '100%', opacity: isDarkMode ? 0 : 1, transition: 'opacity 0.8s ease-in-out' }}
+        style={{
+          objectFit: 'cover',
+          width: '100%',
+          height: '100%',
+          opacity: isDarkMode ? 0 : 1,
+          transition: 'opacity 0.4s ease-in-out',
+        }}
       />
       <img
         src={heroNight}
         alt="Desert night sky"
         className="hero-layer hero-layer--bg"
-        style={{ objectFit: 'cover', width: '100%', height: '100%', opacity: isDarkMode ? 1 : 0, transition: 'opacity 0.8s ease-in-out', position: 'absolute', top: 0, left: 0 }}
+        style={{
+          objectFit: 'cover',
+          width: '100%',
+          height: '100%',
+          opacity: isDarkMode ? 1 : 0,
+          transition: 'opacity 0.4s ease-in-out',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+        }}
       />
 
       <div
         className={`section-overlay section-overlay--golden`}
-        style={{ opacity: isDarkMode ? 0 : 1, transition: 'opacity 0.8s ease-in-out' }}
+        style={{
+          opacity: isDarkMode ? 0 : 1,
+          transition: 'opacity 0.4s ease-in-out',
+        }}
       />
       <div
         className={`section-overlay section-overlay--dark`}
-        style={{ opacity: isDarkMode ? 1 : 0, transition: 'opacity 0.8s ease-in-out', position: 'absolute', top: 0, left: 0 }}
+        style={{
+          opacity: isDarkMode ? 1 : 0,
+          transition: 'opacity 0.4s ease-in-out',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+        }}
       />
-      
+
       <div className="vignette-overlay" />
 
       <StarLayer active={isDarkMode} />
+      <Campfire isDarkMode={isDarkMode} onClick={toggleTheme} />
+      <LanternClicker isDarkMode={isDarkMode} onClick={toggleTheme} />
 
       <div
         className={`section-content hero-content ${visible ? 'hero-content--visible' : ''}`}
@@ -108,21 +178,29 @@ export default function Hero({ isDarkMode }: { isDarkMode: boolean }) {
         src={heroDayFg}
         alt="Desert day foreground"
         className="hero-layer hero-layer--fg"
-        style={{ objectFit: 'cover', width: '100%', height: '100%', opacity: isDarkMode ? 0 : 1, transition: 'opacity 0.8s ease-in-out' }}
+        style={{
+          objectFit: 'cover',
+          width: '100%',
+          height: '100%',
+          opacity: isDarkMode ? 0 : 1,
+          transition: 'opacity 0.4s ease-in-out',
+        }}
       />
       <img
         src={heroNightFg}
         alt="Desert night foreground"
         className="hero-layer hero-layer--fg"
-        style={{ objectFit: 'cover', width: '100%', height: '100%', opacity: isDarkMode ? 1 : 0, transition: 'opacity 0.8s ease-in-out', position: 'absolute', top: 0, left: 0 }}
+        style={{
+          objectFit: 'cover',
+          width: '100%',
+          height: '100%',
+          opacity: isDarkMode ? 1 : 0,
+          transition: 'opacity 0.4s ease-in-out',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+        }}
       />
-
-      <div className="hero__scroll-hint">
-        <div className="hero__scroll-mouse">
-          <div className="hero__scroll-wheel" />
-        </div>
-        <span>Wander Below</span>
-      </div>
     </section>
   );
 }

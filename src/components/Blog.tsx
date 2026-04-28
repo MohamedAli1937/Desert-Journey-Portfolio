@@ -73,7 +73,16 @@ export default function Blog({ isDarkMode }: { isDarkMode: boolean }) {
         }}
       />
 
-      <div className="section-content blog-content" style={{ display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center', paddingTop: '4rem' }}>
+      <div
+        className="section-content blog-content"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '2rem',
+          alignItems: 'center',
+          paddingTop: '4rem',
+        }}
+      >
         <div
           className="campfire-timeline"
           style={{ width: '100%', maxWidth: '1200px', paddingBottom: '2rem' }}

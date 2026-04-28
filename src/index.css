@@ -11,7 +11,7 @@
   --text-main: #3e2723;
   --text-dim: rgba(62, 39, 35, 0.7);
   --accent-color: #d4a574;
-  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.6);
   --glass-border: rgba(166, 124, 82, 0.4);
   --card-bg: rgba(255, 248, 225, 0.8);
   --nav-bg: rgba(255, 255, 255, 0.3);
@@ -19,6 +19,8 @@
   --hero-text-fill: #3e2723;
   --hero-text-stroke: rgba(62, 39, 35, 0.4);
   --hero-accent-glow: rgba(212, 165, 116, 0.4);
+  --oasis-green: #64dcc8;
+  --oasis-green-glow: rgba(100, 220, 200, 0.4);
 
   scroll-behavior: smooth;
   overscroll-behavior-y: contain;
@@ -43,29 +45,31 @@
 }
 
 .dark-mode {
-  /* Dark Mode (Night Desert) */
-  --bg-color: #0a0e1a;
-  --text-main: #f4e4c1;
-  --text-dim: rgba(244, 228, 193, 0.75);
-  --accent-color: #8ba6ff;
-  --glass-bg: rgba(10, 14, 26, 0.1);
-  --glass-border: rgba(139, 166, 255, 0.2);
-  --card-bg: rgba(15, 25, 45, 0.4);
-  --nav-bg: rgba(10, 14, 26, 0.4);
-  --shadow: rgba(0, 0, 0, 0.6);
+  /* Dark Mode (Night Desert) - Enhanced Deep Night */
+  --bg-color: #05070a;
+  --text-main: #e0e6ed;
+  --text-dim: rgba(224, 230, 237, 0.7);
+  --accent-color: #6366f1;
+  --glass-bg: rgba(10, 15, 25, 0.6);
+  --glass-border: rgba(99, 102, 241, 0.3);
+  --card-bg: rgba(13, 18, 30, 0.5);
+  --nav-bg: rgba(5, 7, 10, 0.5);
+  --shadow: rgba(0, 0, 0, 0.8);
   --hero-text-fill: #ffffff;
-  --hero-text-stroke: rgba(200, 215, 255, 0.8);
-  --hero-accent-glow: rgba(139, 166, 255, 0.8);
+  --hero-text-stroke: rgba(99, 102, 241, 0.5);
+  --hero-accent-glow: rgba(99, 102, 241, 0.6);
 }
 
 body {
+  margin: 0;
   font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
   color: var(--text-main);
   background: var(--bg-color);
-  line-height: 1.7;
+  overflow-x: hidden;
   transition:
-    background-color 0.8s ease-in-out,
-    color 0.8s ease-in-out;
+    background-color 0.3s ease,
+    color 0.3s ease;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -85,13 +89,13 @@ body {
 .desert-subtitle,
 .section-label {
   transition:
-    background-color 0.8s ease-in-out,
-    border-color 0.8s ease-in-out,
-    color 0.8s ease-in-out,
-    box-shadow 0.8s ease-in-out,
-    backdrop-filter 0.8s ease-in-out,
-    opacity 0.8s ease-in-out,
-    transform 0.8s ease-in-out;
+    background-color 0.4s ease-in-out,
+    border-color 0.4s ease-in-out,
+    color 0.4s ease-in-out,
+    box-shadow 0.4s ease-in-out,
+    backdrop-filter 0.4s ease-in-out,
+    opacity 0.4s ease-in-out,
+    transform 0.4s ease-in-out;
 }
 a {
   color: inherit;
@@ -180,9 +184,9 @@ button {
 .section-overlay--oasis {
   background: linear-gradient(
     180deg,
-    rgba(10, 35, 30, 0.7) 0%,
-    rgba(15, 55, 45, 0.4) 40%,
-    rgba(10, 35, 30, 0.8) 100%
+    rgba(10, 35, 30, 0.2) 0%,
+    rgba(15, 55, 45, 0.1) 40%,
+    rgba(10, 35, 30, 0.25) 100%
   );
 }
 
@@ -221,6 +225,12 @@ button {
   width: 100%;
   padding: 3rem 2rem;
   margin: 0 auto;
+}
+
+.about-content {
+  padding-top: 0rem !important;
+  margin-top: -5rem !important;
+  justify-content: flex-start !important;
 }
 
 .hero-parallax-container {
@@ -265,8 +275,6 @@ button {
 
 .hero-glass-box {
   background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--glass-border);
   border-radius: 24px;
   padding: 1.2rem 1.5rem;
@@ -441,7 +449,7 @@ button {
 .about-content {
   justify-content: flex-start !important;
   align-items: flex-start !important;
-  padding-top: 5rem !important;
+  padding-top: 2rem !important;
   padding-bottom: 2rem !important;
   min-height: auto;
 }
@@ -733,8 +741,46 @@ button {
   overflow: hidden;
   transition: all 0.5s ease;
   font-size: 0.95rem;
-  line-height: 1.6;
+  line-height: 2.8;
   color: rgba(220, 245, 240, 0.9);
+}
+
+.oasis-glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 2px solid var(--accent-color);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 25px 60px var(--shadow);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  max-width: 650px;
+  margin: 0 0 0.5rem 0;
+}
+
+.dark-mode .oasis-glass-card {
+  background: var(--card-bg);
+  border-color: var(--oasis-green);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+}
+
+.oasis-intro-text p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-dim);
+}
+
+.oasis-intro-text strong {
+  color: var(--accent-color);
+  text-shadow: 0 0 10px var(--hero-accent-glow);
+  font-weight: 700;
+}
+
+.dark-mode .oasis-intro-text strong {
+  color: var(--oasis-green) !important;
+  text-shadow: 0 0 15px var(--oasis-green-glow);
+  font-weight: 600;
 }
 .oasis-water-card strong {
   color: #64dcc8;
@@ -780,22 +826,271 @@ button {
   }
 }
 
-/* Disciplines Grid */
-.disciplines-grid {
+/* Two Column Layout */
+.about-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 0.6rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1300px;
 }
 
-/* Rock Info Blocks */
-.oasis-rock-card {
-  background: rgba(20, 30, 25, 0.6);
+.about-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.about-right-col {
+  position: sticky;
+  top: 100px;
+  min-height: 300px;
+}
+
+/* 3-Column Mini Grid */
+.disciplines-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+  max-width: 650px;
+  width: 100%;
+}
+
+.oasis-rock-card-pill {
+  background: var(--card-bg);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(100, 220, 200, 0.1);
-  border-radius: 8px;
-  padding: 0.6rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 54px;
+}
+
+.oasis-rock-card-pill--locked {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.oasis-rock-card-pill--locked:hover {
+  transform: none !important;
+  border-color: var(--glass-border) !important;
+}
+
+.oasis-rock-card-pill:hover {
+  background: var(--glass-bg);
+  transform: translateY(-2px);
+  border-color: var(--accent-color);
+}
+
+.oasis-rock-card-pill.active {
+  background: var(--glass-bg);
+  border-color: var(--accent-color);
+  box-shadow: 0 0 20px var(--oasis-green-glow);
+}
+
+.dark-mode .oasis-rock-card-pill:hover,
+.dark-mode .oasis-rock-card-pill.active {
+  border-color: var(--oasis-green);
+}
+
+.oasis-rock-card__icon-mini {
+  font-size: 1.2rem;
+  color: var(--accent-color);
+  filter: drop-shadow(0 0 5px var(--hero-accent-glow));
+  transition: color 0.4s ease;
+}
+
+.dark-mode .oasis-rock-card__icon-mini {
+  color: var(--oasis-green);
+  filter: drop-shadow(0 0 10px var(--oasis-green-glow));
+}
+
+.oasis-rock-card__title-mini {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+}
+
+/* Detail Card Styling */
+.oasis-detail-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(25px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 50px var(--shadow);
+  max-width: 400px;
+  width: 100%;
+}
+
+.oasis-detail-card__header {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1.2rem;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.oasis-detail-card__icon {
+  font-size: 2rem;
+  color: var(--accent-color);
+  filter: drop-shadow(0 0 10px var(--hero-accent-glow));
+  transition: color 0.4s ease;
+}
+
+.dark-mode .oasis-detail-card__icon {
+  color: var(--oasis-green);
+  filter: drop-shadow(0 0 15px var(--oasis-green-glow));
+}
+
+.oasis-detail-card__title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.oasis-speech-bubble {
+  position: absolute;
+  top: 63%; /* Moved down from 60.3% */
+  left: 60%;
+  transform: translate(-50%, -100%);
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--accent-color);
+  border-radius: 16px;
+  padding: 0.6rem 1.2rem;
+  color: var(--text-main);
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 10px 25px var(--shadow);
+  z-index: 50;
+  animation: float-bubble 3s ease-in-out infinite;
+  pointer-events: none;
   transition: all 0.4s ease;
-  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.dark-mode .oasis-speech-bubble {
+  border-color: var(--oasis-green);
+  box-shadow: 0 10px 25px var(--oasis-green-glow);
+}
+
+.speech-bubble-tail {
+  position: absolute;
+  bottom: -8px;
+  right: 20px; /* Moved to the right */
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid var(--accent-color);
+}
+
+.dark-mode .speech-bubble-tail {
+  border-top-color: var(--oasis-green);
+}
+
+.speech-bubble-tail::after {
+  content: '';
+  position: absolute;
+  bottom: 1px;
+  left: -7px;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid var(--card-bg);
+}
+
+@keyframes float-bubble {
+  0%,
+  100% {
+    transform: translate(-50%, -100%) translateY(0);
+  }
+  50% {
+    transform: translate(-50%, -100%) translateY(-10px);
+  }
+}
+@keyframes notice-pulse {
+  0% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: detail-reveal 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes detail-reveal {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.oasis-rock-card__icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.2rem;
+  color: var(--oasis-green);
+  filter: drop-shadow(0 0 10px var(--oasis-green-glow));
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.oasis-rock-card__title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--oasis-green);
+  margin: 0;
+}
+
+.oasis-rock-card__skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.disciplines-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0;
+  padding: 1rem 0;
 }
 .oasis-rock-card--locked {
   opacity: 0.5;
@@ -832,7 +1127,7 @@ button {
 /* Foreground Skills Grid */
 .about-foreground-skills {
   position: absolute;
-  top: 60%;
+  top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
@@ -888,7 +1183,7 @@ button {
 
 .nav-link {
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 700;
   color: var(--text-dim);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
@@ -942,11 +1237,11 @@ button {
 }
 .oasis-leaf-tag {
   padding: 0.2rem 0.5rem;
-  background: rgba(40, 90, 75, 0.4);
-  border: 1px solid rgba(100, 220, 200, 0.3);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
   border-radius: 6px;
-  font-size: 0.65rem;
-  color: #a0f0e0;
+  font-size: 0.7rem;
+  color: var(--text-main);
   letter-spacing: 0.02em;
   display: inline-block;
   transition: all 0.3s ease;
@@ -1052,10 +1347,11 @@ button {
 .ruin-stone-card__symbol {
   font-size: 1.2rem;
   display: inline-block;
-  margin-bottom: 0;
+  margin-bottom: 0.5rem;
   filter: grayscale(100%) opacity(0.5);
   transition: all 0.6s ease;
 }
+
 .ruin-stone-card:hover .ruin-stone-card__symbol {
   filter: grayscale(0%) opacity(1)
     drop-shadow(0 0 15px rgba(255, 200, 100, 0.5));
@@ -1662,4 +1958,94 @@ button {
 
 .theme-toggle:hover {
   transform: scale(1.1);
+}
+
+/* Interactive Hero Elements - Exact Coordinates */
+.campfire-interactive-area {
+  position: absolute;
+  top: 86.3%; /* 932 / 1080 */
+  left: 49.63%; /* 953 / 1920 */
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  z-index: 30;
+  border-radius: 50%;
+}
+
+.lantern-interactive-area {
+  position: absolute;
+  top: 59.07%; /* 638 / 1080 */
+  left: 83.54%; /* 1604 / 1920 */
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  z-index: 30;
+  border-radius: 50%;
+}
+
+@keyframes fire-glow {
+  0%,
+  100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateX(-50%) scale(1.2);
+    opacity: 0.6;
+  }
+}
+
+.interactive-note {
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: rgba(10, 15, 30, 0.85);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.campfire-interactive-area:hover .interactive-note,
+.lantern-interactive-area:hover .interactive-note {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.oasis-campfire {
+  top: 86.48%; /* 934 / 1080 */
+  left: 49.68%; /* 954 / 1920 */
+}
+
+.oasis-lantern {
+  top: 59.35%; /* 641 / 1080 */
+  left: 84.32%; /* 1619 / 1920 */
+}
+
+.oasis-money-jar {
+  top: 77.78%; /* 840 / 1080 */
+  left: 21.88%; /* 420 / 1920 */
+  width: 120px;
+  height: 120px;
+}
+
+.oasis-money-jar .interactive-note {
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%) translateX(10px);
+}
+
+.oasis-money-jar:hover .interactive-note {
+  opacity: 1;
+  transform: translateY(-50%) translateX(20px);
 }
