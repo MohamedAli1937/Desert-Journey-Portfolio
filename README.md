@@ -49,5 +49,6 @@ To update the live website at `username.github.io`:
 - **Styling**: Vanilla CSS (Modern design)
 - **Icons**: React Icons (Feather)
 
-See the exemple website at [Mohamed Ali](https://mohamedali1937.github.io)
+See the exemple website at [MyPortfolio](https://mohamedali1937.github.io)
+
 Built by [Mohamed Ali](https://github.com/MohamedAli1937)
