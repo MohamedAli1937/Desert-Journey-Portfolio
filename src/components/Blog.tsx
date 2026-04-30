@@ -22,7 +22,7 @@ const posts = [
     excerpt:
       "Teaching radio spectrograms the language of the universe — migrating SunPy's radiospectra to NDCube.",
     readTime: '8 min read',
-    url: 'https://mohamedali1937.github.io/post01/',
+    url: 'https://mohamedali1937.github.io/sunpy_blog/',
   },
 ];
 
