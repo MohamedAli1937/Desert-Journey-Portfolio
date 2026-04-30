@@ -28,14 +28,14 @@ npm run dev
 
 ## 🏗️ Build & Deployment
 
-To update the live website at `mohamedali1937.github.io`:
+To update the live website at `username.github.io`:
 
 1.  **Build the project**:
     ```bash
     npm run build
     ```
 2.  **Copy the output**:
-    Copy all files from the `dist/` directory to your `MohamedAli1937.github.io` repository.
+    Copy all files from the `dist/` directory to your `username.github.io` repository.
 3.  **Push to GitHub**:
     Commit and push the changes from the `github.io` repository.
 
@@ -49,4 +49,5 @@ To update the live website at `mohamedali1937.github.io`:
 - **Styling**: Vanilla CSS (Modern design)
 - **Icons**: React Icons (Feather)
 
+See the exemple website at [Mohamed Ali](https://mohamedali1937.github.io)
 Built by [Mohamed Ali](https://github.com/MohamedAli1937)
