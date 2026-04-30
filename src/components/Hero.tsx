@@ -1,102 +1,220 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { FiMapPin, FiCpu, FiStar } from 'react-icons/fi';
+import heroDay from '../assets/hero-day.png';
+import heroNight from '../assets/hero-night.png';
+import heroDayFg from '../assets/hero-day-bg.png';
+import heroNightFg from '../assets/hero-night-bg.png';
 
-interface HeroProps {
-  compact?: boolean;
-  setActiveTab?: (tab: string) => void;
-}
+const AnimatedName = () => {
+  return (
+    <div
+      style={{
+        position: 'relative',
+        width: '100%',
+        maxWidth: '700px',
+        marginBottom: '1rem',
+      }}
+    >
+      <svg viewBox="0 0 1000 140" className="animated-name-svg">
+        <text
+          x="500"
+          y="100"
+          textAnchor="middle"
+          className="animated-text"
+          style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+        >
+          Mohamed <tspan className="animated-text--accent">Ali</tspan>
+        </text>
+      </svg>
+    </div>
+  );
+};
 
-const equations = [
-  'E = mc²',
-  '∇ × E = −∂B/∂t',
-  'iℏ ∂ψ/∂t = Ĥψ',
-  'F = G·m₁m₂/r²',
-  'F = ma',
-  'pV = nRT',
-  'V = IR',
-  'λ = h/p',
-  'ΔS ≥ 0',
-  'E² = (pc)² + (mc²)²',
-  '∇·E = ρ/ε₀',
-  'a² + b² = c²',
-  '∮B·dl = μ₀I',
-  'Δx·Δp ≥ ħ/2',
-  'd²x/dt² + ω²x = 0',
-];
+const StarLayer = ({ active }: { active: boolean }) => {
+  if (!active) return null;
+  return (
+    <div className="hero__stars">
+      {[...Array(40)].map((_, i) => (
+        <div
+          key={i}
+          className="hero__star"
+          style={{
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 5}s`,
+            animationDuration: `${3 + Math.random() * 5}s`,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
 
-const floatingSymbols = ['∫', '∑', '∇', 'π', '∞', 'λ', 'Ω', 'ℏ'];
+const Campfire = ({
+  isDarkMode,
+  onClick,
+}: {
+  isDarkMode: boolean;
+  onClick: () => void;
+}) => {
+  return (
+    <div className="campfire-interactive-area" onClick={onClick}>
+      <div className="interactive-note">
+        {isDarkMode ? 'Turn OFF campfire' : 'Turn ON campfire'}
+      </div>
+    </div>
+  );
+};
 
-export default function Hero({ compact, setActiveTab }: HeroProps) {
-  const [eqIndex, setEqIndex] = useState(0);
+const LanternClicker = ({
+  isDarkMode,
+  onClick,
+}: {
+  isDarkMode: boolean;
+  onClick: () => void;
+}) => {
+  return (
+    <div className="lantern-interactive-area" onClick={onClick}>
+      <div className="interactive-note">
+        {isDarkMode ? 'Turn OFF lantern' : 'Turn ON lantern'}
+      </div>
+    </div>
+  );
+};
+
+const HeroSecretNote = () => (
+  <div className="hero-secret-interactive-area">
+    <div className="interactive-note">Not as far as it seems</div>
+  </div>
+);
+
+const HeroNightSecretNote = () => (
+  <div className="hero-night-secret-area">
+    <div className="interactive-note">Not all stars are random</div>
+  </div>
+);
+
+export default function Hero({
+  isDarkMode,
+  toggleTheme,
+}: {
+  isDarkMode: boolean;
+  toggleTheme: () => void;
+}) {
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setEqIndex((prev) => (prev + 1) % equations.length);
-    }, 2000);
-    return () => clearInterval(interval);
+    const timer = setTimeout(() => setVisible(true), 300);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
-    <section
-      className={`section section--hero ${compact ? 'section--hero-compact' : ''}`}
-      id="hero"
-    >
-      <div className="hero__float-symbols">
-        {floatingSymbols.map((sym, i) => (
-          <span key={i} className="hero__float-symbol">
-            {sym}
-          </span>
-        ))}
-      </div>
+    <section className="desert-section hero-parallax-container" id="hero">
+      {/* Back Layers (The Desert Sky) - Cross-fading */}
+      <img
+        src={heroDay}
+        alt="Desert day sky"
+        className="hero-layer hero-layer--bg"
+        style={{
+          objectFit: 'cover',
+          width: '100%',
+          height: '100%',
+          opacity: isDarkMode ? 0 : 1,
+          transition: 'opacity 0.4s ease-in-out',
+        }}
+      />
+      <img
+        src={heroNight}
+        alt="Desert night sky"
+        className="hero-layer hero-layer--bg"
+        style={{
+          objectFit: 'cover',
+          width: '100%',
+          height: '100%',
+          opacity: isDarkMode ? 1 : 0,
+          transition: 'opacity 0.4s ease-in-out',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+        }}
+      />
 
-      <div className="hero__content">
-        <h1 className="hero__name">Mohamed Ali</h1>
+      <div
+        className={`section-overlay section-overlay--golden`}
+        style={{
+          opacity: isDarkMode ? 0 : 1,
+          transition: 'opacity 0.4s ease-in-out',
+        }}
+      />
+      <div
+        className={`section-overlay section-overlay--dark`}
+        style={{
+          opacity: isDarkMode ? 1 : 0,
+          transition: 'opacity 0.4s ease-in-out',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+        }}
+      />
 
-        <p className="hero__tagline">
-          Software Engineering Student <br />
-          AI &amp; Machine Learning · Mathematics · Physics
-        </p>
+      <div className="vignette-overlay" />
 
-        <p className="hero__location">
-          <span>✦</span> Tunisia · SWE Student in INSAT <span>✦</span>
-        </p>
+      <StarLayer active={isDarkMode} />
+      <Campfire isDarkMode={isDarkMode} onClick={toggleTheme} />
+      <LanternClicker isDarkMode={isDarkMode} onClick={toggleTheme} />
+      <HeroSecretNote />
+      {isDarkMode && <HeroNightSecretNote />}
 
-        <div
-          style={{
-            marginTop: '1.5rem',
-            position: 'relative',
-            height: '2.5rem',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          {equations.map((eq, i) => {
-            const isActive = i === eqIndex;
-            return (
-              <div
-                key={i}
-                style={{
-                  position: 'absolute',
-                  fontSize: '1.5rem',
-                  color: 'var(--gold)',
-                  fontFamily: 'var(--font-decorative)',
-                  whiteSpace: 'nowrap',
-                  letterSpacing: '0.05em',
-                  transition: 'all 1.2s cubic-bezier(0.25, 0.8, 0.25, 1)',
-                  opacity: isActive ? 0.6 : 0,
-                  transform: isActive
-                    ? 'translateY(0px) scale(1)'
-                    : 'translateY(15px) scale(0.95)',
-                  pointerEvents: 'none',
-                  filter: isActive ? 'blur(0px)' : 'blur(4px)',
-                }}
-              >
-                {eq}
-              </div>
-            );
-          })}
+      <div
+        className={`section-content hero-content ${visible ? 'hero-content--visible' : ''}`}
+      >
+        <div className="hero-glass-box">
+          {isDarkMode && <div className="fire-light-effect" />}
+          {isDarkMode && <div className="lantern-glow-effect" />}
+          <div className="hero__intro">Hey! I am</div>
+          <AnimatedName />
+          <h2 className="hero__tagline">Software Engineering Student</h2>
+          <div className="hero__meta">
+            <div className="hero__meta-item">
+              <FiCpu className="hero__meta-icon" />
+              <span>AI & Machine Learning · Mathematics · Physics</span>
+            </div>
+            <div className="hero__meta-item">
+              <FiMapPin className="hero__meta-icon" />
+              <span>Tunisia · INSAT</span>
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* Front Layers (The Desert Foreground) - Cross-fading */}
+      <img
+        src={heroDayFg}
+        alt="Desert day foreground"
+        className="hero-layer hero-layer--fg"
+        style={{
+          objectFit: 'cover',
+          width: '100%',
+          height: '100%',
+          opacity: isDarkMode ? 0 : 1,
+          transition: 'opacity 0.4s ease-in-out',
+        }}
+      />
+      <img
+        src={heroNightFg}
+        alt="Desert night foreground"
+        className="hero-layer hero-layer--fg"
+        style={{
+          objectFit: 'cover',
+          width: '100%',
+          height: '100%',
+          opacity: isDarkMode ? 1 : 0,
+          transition: 'opacity 0.4s ease-in-out',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+        }}
+      />
     </section>
   );
 }
