@@ -62,7 +62,31 @@ const projects = [
   },
 ];
 
-export default function Projects({ isDarkMode }: { isDarkMode: boolean }) {
+export default function Projects({
+  isDarkMode,
+  toggleTheme,
+}: {
+  isDarkMode: boolean;
+  toggleTheme: () => void;
+}) {
+  const ProjectCampfire = ({ onClick }: { onClick: () => void }) => (
+    <div
+      className="campfire-interactive-area project-campfire"
+      onClick={onClick}
+    >
+      <div className="interactive-note">
+        {isDarkMode ? 'Turn OFF campfire' : 'Turn ON campfire'}
+      </div>
+    </div>
+  );
+
+  const ProjectLantern = ({ onClick }: { onClick: () => void }) => (
+    <div className="lantern-interactive-area project-lantern" onClick={onClick}>
+      <div className="interactive-note">
+        {isDarkMode ? 'Turn OFF lantern' : 'Turn ON lantern'}
+      </div>
+    </div>
+  );
   return (
     <section className="desert-section hero-parallax-container" id="projects">
       <img
@@ -180,6 +204,8 @@ export default function Projects({ isDarkMode }: { isDarkMode: boolean }) {
           left: 0,
         }}
       />
+      <ProjectCampfire onClick={toggleTheme} />
+      <ProjectLantern onClick={toggleTheme} />
     </section>
   );
 }

@@ -82,6 +82,18 @@ const LanternClicker = ({
   );
 };
 
+const HeroSecretNote = () => (
+  <div className="hero-secret-interactive-area">
+    <div className="interactive-note">Not as far as it seems</div>
+  </div>
+);
+
+const HeroNightSecretNote = () => (
+  <div className="hero-night-secret-area">
+    <div className="interactive-note">Not all stars are random</div>
+  </div>
+);
+
 export default function Hero({
   isDarkMode,
   toggleTheme,
@@ -150,6 +162,8 @@ export default function Hero({
       <StarLayer active={isDarkMode} />
       <Campfire isDarkMode={isDarkMode} onClick={toggleTheme} />
       <LanternClicker isDarkMode={isDarkMode} onClick={toggleTheme} />
+      <HeroSecretNote />
+      {isDarkMode && <HeroNightSecretNote />}
 
       <div
         className={`section-content hero-content ${visible ? 'hero-content--visible' : ''}`}

@@ -125,9 +125,18 @@ export default function App() {
         isDarkMode={isDarkMode}
         toggleTheme={() => setIsDarkMode(!isDarkMode)}
       />
-      <Projects isDarkMode={isDarkMode} />
-      <Blog isDarkMode={isDarkMode} />
-      <Contact isDarkMode={isDarkMode} />
+      <Projects
+        isDarkMode={isDarkMode}
+        toggleTheme={() => setIsDarkMode(!isDarkMode)}
+      />
+      <Blog
+        isDarkMode={isDarkMode}
+        toggleTheme={() => setIsDarkMode(!isDarkMode)}
+      />
+      <Contact
+        isDarkMode={isDarkMode}
+        toggleTheme={() => setIsDarkMode(!isDarkMode)}
+      />
     </div>
   );
 }
