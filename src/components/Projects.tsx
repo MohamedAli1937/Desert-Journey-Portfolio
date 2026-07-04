@@ -5,6 +5,13 @@ import projectNightFg from '../assets/project-night-bg.png';
 
 const projects = [
   {
+    title: 'GitFlow Dashboard',
+    desc: 'Developer workflow visualization tool for managing Git-based project pipelines.',
+    tech: ['TypeScript', 'Git', 'DevTools'],
+    url: 'https://github.com/MohamedAli1937/GitFlow-Dashboard',
+    symbol: '🌿',
+  },
+  {
     title: 'TDA Market Risk Analyzer',
     desc: 'Real-time financial risk detection using Topological Data Analysis.',
     tech: ['Mathematics', 'TDA', 'Python'],
@@ -17,6 +24,13 @@ const projects = [
     tech: ['Solidity', 'Ethereum', 'React'],
     url: 'https://github.com/MohamedAli1937/Certificate-DApp',
     symbol: '📜',
+  },
+  {
+    title: 'MITRE ATLAS Knowledge Graph',
+    desc: 'Knowledge graph system for adversarial ML threats and AI security mapping.',
+    tech: ['Python', 'Knowledge Graphs', 'AI Security'],
+    url: 'https://github.com/MohamedAli1937/mitre-atlas-kg',
+    symbol: '🧠',
   },
   {
     title: "Alzheimer's MRI Prediction",

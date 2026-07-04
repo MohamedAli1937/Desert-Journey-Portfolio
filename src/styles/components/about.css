@@ -1,0 +1,553 @@
+/* ===== ABOUT / OASIS ===== */
+.about-content {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* Water Reflection Bio Card */
+.oasis-water-card {
+  padding: 0.8rem 1.2rem;
+  margin-bottom: 1rem;
+  background: rgba(15, 45, 40, 0.35);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(100, 220, 200, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  font-size: 0.95rem;
+  line-height: 2.8;
+  color: rgba(220, 245, 240, 0.9);
+}
+
+.oasis-glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 2px solid var(--accent-color);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 25px 60px var(--shadow);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  max-width: 650px;
+  margin: 0 0 0.5rem 0;
+}
+
+.dark-mode .oasis-glass-card {
+  background: var(--card-bg);
+  border-color: var(--oasis-green);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+}
+
+.oasis-intro-text p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-dim);
+}
+
+.oasis-intro-text strong {
+  color: var(--accent-color);
+  text-shadow: 0 0 10px var(--hero-accent-glow);
+  font-weight: 700;
+}
+
+.dark-mode .oasis-intro-text strong {
+  color: var(--oasis-green) !important;
+  text-shadow: 0 0 15px var(--oasis-green-glow);
+  font-weight: 600;
+}
+.oasis-water-card strong {
+  color: #64dcc8;
+  font-weight: 500;
+}
+.oasis-water-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 0%,
+    rgba(100, 220, 200, 0.2),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+.oasis-water-card:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 15px 50px rgba(0, 0, 0, 0.4),
+    inset 0 0 30px rgba(100, 220, 200, 0.15);
+  border-color: rgba(100, 220, 200, 0.4);
+}
+.hero-glass-box {
+  padding: 1rem !important;
+  width: 100%;
+  max-width: 1300px;
+}
+.oasis-water-card:hover::before {
+  opacity: 1;
+  animation: ripple-expand 2s ease-out infinite;
+}
+@keyframes ripple-expand {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Two Column Layout */
+.about-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1300px;
+}
+
+.about-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.about-right-col {
+  position: sticky;
+  top: 100px;
+  min-height: 300px;
+}
+
+/* 3-Column Mini Grid */
+.disciplines-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+  max-width: 650px;
+  width: 100%;
+}
+
+.oasis-rock-card-pill {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 54px;
+}
+
+.oasis-rock-card-pill--locked {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.oasis-rock-card-pill--locked:hover {
+  transform: none !important;
+  border-color: var(--glass-border) !important;
+}
+
+.oasis-rock-card-pill:hover {
+  background: var(--glass-bg);
+  transform: translateY(-2px);
+  border-color: var(--accent-color);
+}
+
+.oasis-rock-card-pill.active {
+  background: var(--glass-bg);
+  border-color: var(--accent-color);
+  box-shadow: 0 0 20px var(--oasis-green-glow);
+}
+
+.dark-mode .oasis-rock-card-pill:hover,
+.dark-mode .oasis-rock-card-pill.active {
+  border-color: var(--oasis-green);
+}
+
+.oasis-rock-card__icon-mini {
+  font-size: 1.2rem;
+  color: var(--accent-color);
+  filter: drop-shadow(0 0 5px var(--hero-accent-glow));
+  transition: color 0.4s ease;
+}
+
+.dark-mode .oasis-rock-card__icon-mini {
+  color: var(--oasis-green);
+  filter: drop-shadow(0 0 10px var(--oasis-green-glow));
+}
+
+.oasis-rock-card__title-mini {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+}
+
+/* Detail Card Styling */
+.oasis-detail-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(25px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 50px var(--shadow);
+  max-width: 400px;
+  width: 100%;
+}
+
+.oasis-detail-card__header {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1.2rem;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.oasis-detail-card__icon {
+  font-size: 2rem;
+  color: var(--accent-color);
+  filter: drop-shadow(0 0 10px var(--hero-accent-glow));
+  transition: color 0.4s ease;
+}
+
+.dark-mode .oasis-detail-card__icon {
+  color: var(--oasis-green);
+  filter: drop-shadow(0 0 15px var(--oasis-green-glow));
+}
+
+.oasis-detail-card__title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.oasis-speech-bubble {
+  position: absolute;
+  top: 63%; /* Moved down from 60.3% */
+  left: 60%;
+  transform: translate(-50%, -100%);
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--accent-color);
+  border-radius: 16px;
+  padding: 0.6rem 1.2rem;
+  color: var(--text-main);
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 10px 25px var(--shadow);
+  z-index: 50;
+  animation: float-bubble 3s ease-in-out infinite;
+  pointer-events: none;
+  transition: all 0.4s ease;
+}
+
+.dark-mode .oasis-speech-bubble {
+  border-color: var(--oasis-green);
+  box-shadow: 0 10px 25px var(--oasis-green-glow);
+}
+
+.speech-bubble-tail {
+  position: absolute;
+  bottom: -8px;
+  right: 20px; /* Moved to the right */
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid var(--accent-color);
+}
+
+.dark-mode .speech-bubble-tail {
+  border-top-color: var(--oasis-green);
+}
+
+.speech-bubble-tail::after {
+  content: '';
+  position: absolute;
+  bottom: 1px;
+  left: -7px;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid var(--card-bg);
+}
+
+@keyframes float-bubble {
+  0%,
+  100% {
+    transform: translate(-50%, -100%) translateY(0);
+  }
+  50% {
+    transform: translate(-50%, -100%) translateY(-10px);
+  }
+}
+@keyframes notice-pulse {
+  0% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: detail-reveal 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes detail-reveal {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.oasis-rock-card__icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.2rem;
+  color: var(--oasis-green);
+  filter: drop-shadow(0 0 10px var(--oasis-green-glow));
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.oasis-rock-card__title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--oasis-green);
+  margin: 0;
+}
+
+.oasis-rock-card__skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.disciplines-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0;
+  padding: 1rem 0;
+}
+.oasis-rock-card--locked {
+  opacity: 0.5;
+  border-style: dashed;
+}
+.oasis-rock-card:hover {
+  border-radius: 25px 15px 30px 20px;
+  background: rgba(25, 40, 35, 0.8);
+  border-color: rgba(100, 220, 200, 0.3);
+  transform: translateY(-4px) rotate(1deg);
+}
+.oasis-rock-card__icon {
+  font-size: 1.3rem;
+  color: #64dcc8;
+  margin-bottom: 0.4rem;
+  filter: drop-shadow(0 0 4px rgba(100, 220, 200, 0.4));
+  transition: transform 0.4s ease;
+}
+.oasis-rock-card:hover .oasis-rock-card__icon {
+  transform: scale(1.1);
+}
+.oasis-rock-card__title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  color: #fff;
+  margin-bottom: 0.4rem;
+}
+.oasis-rock-card__skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Foreground Skills Grid */
+.about-foreground-skills {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 1300px;
+  z-index: 30;
+  pointer-events: none;
+  padding: 0 2rem;
+}
+.about-foreground-skills .disciplines-grid,
+.about-foreground-skills .relic-grid {
+  pointer-events: auto;
+  justify-content: center;
+}
+.desert-nav {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1200px;
+  z-index: 1000;
+  background: var(--nav-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 100px;
+  padding: 0.5rem 1.5rem;
+  box-shadow: 0 10px 30px var(--shadow);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-weight: 700;
+  color: var(--text-main);
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.nav-logo span {
+  color: var(--accent-color);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0.5rem 0;
+}
+
+.nav-link {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  padding: 0.2rem 0.5rem;
+}
+
+.nav-link--active {
+  color: #ffdda1 !important;
+  font-size: 1rem !important;
+  font-weight: 800 !important;
+  transform: scale(1.1);
+  text-shadow: 0 0 15px rgba(255, 200, 100, 0.6);
+  letter-spacing: 0.05em;
+}
+
+.nav-link--active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 2px;
+  background: var(--accent-color);
+  box-shadow: 0 0 10px var(--accent-color);
+  border-radius: 10px;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  background: var(--accent-color);
+  color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px var(--shadow);
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+}
+.oasis-rock-card--compact {
+  background: rgba(10, 25, 20, 0.3) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(100, 220, 200, 0.2);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+}
+.oasis-leaf-tag {
+  padding: 0.2rem 0.5rem;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  font-size: 0.7rem;
+  color: var(--text-main);
+  letter-spacing: 0.02em;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+.oasis-leaf-tag:hover {
+  background: rgba(60, 120, 100, 0.6);
+  color: #fff;
+  border-color: #64dcc8;
+}
+@keyframes float-leaf {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(2deg);
+  }
+}
+.oasis-leaf-tag:nth-child(2n) {
+  animation-delay: 1s;
+  border-radius: 4px 12px 4px 12px;
+}
+.oasis-leaf-tag:nth-child(3n) {
+  animation-delay: 2s;
+}
+.oasis-leaf-tag:nth-child(4n) {
+  animation-delay: 0.5s;
+}
+.oasis-leaf-tag--locked {
+  border-style: dashed;
+  opacity: 0.5;
+}

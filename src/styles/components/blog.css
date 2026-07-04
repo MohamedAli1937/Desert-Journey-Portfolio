@@ -1,0 +1,329 @@
+/* ===== BLOG / CAMPFIRE ===== */
+.blog-content {
+  padding-top: 2rem !important;
+  padding-bottom: 2rem !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+.blog-header {
+  padding: 0.8rem 1.2rem;
+}
+
+.blog-header .desert-title {
+  font-family: 'Efco Brookshire', Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+
+.blog-header .desert-subtitle {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+.campfire-parchment--mini {
+  padding: 1rem !important;
+  border-radius: 12px;
+}
+
+/* Timeline = Caravan Path / Rope Line */
+.campfire-timeline-vertical {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 3rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0;
+  padding: 2rem 0;
+  padding-left: 5%;
+}
+
+/* Blog Post = 3D Parchment Scroll */
+.campfire-parchment-scroll {
+  position: relative;
+  background-image: var(--scroll-img);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding: 3rem 2.2rem;
+  color: var(--scroll-text);
+  width: 250px;
+  min-height: 380px;
+  text-decoration: none;
+  box-shadow: 15px 15px 40px rgba(0, 0, 0, 0.4);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 1;
+  margin: 2rem 0;
+  opacity: 0;
+  transform: translateY(20px);
+  overflow: hidden;
+}
+
+.campfire-parchment-scroll {
+  /* ... existing ... */
+  min-height: 380px;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.campfire-parchment-scroll.animate-unroll {
+  animation: scroll-unroll 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  transform-origin: top;
+}
+
+.campfire-parchment-scroll.animate-unroll .campfire-parchment__inner-border,
+.campfire-parchment-scroll.animate-unroll .campfire-parchment__header,
+.campfire-parchment-scroll.animate-unroll .campfire-parchment__body,
+.campfire-parchment-scroll.animate-unroll .campfire-parchment__footer {
+  animation: content-fade-in 0.5s ease-out 0.4s forwards;
+  opacity: 0;
+}
+
+@keyframes scroll-unroll {
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes content-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dark-mode .campfire-parchment-scroll {
+  filter: brightness(0.8) sepia(0.2);
+  box-shadow: 15px 15px 50px rgba(0, 0, 0, 0.9);
+}
+
+.dark-mode .campfire-parchment__excerpt {
+  opacity: 0.9;
+}
+
+/* Scroll Rolls */
+.scroll-roll {
+  position: absolute;
+  left: -5%;
+  right: -5%;
+  height: 35px;
+  background: var(--scroll-roll-bg);
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(0, 0, 0, 0.1) 80%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+.scroll-roll--top {
+  top: -20px;
+}
+
+.scroll-roll--bottom {
+  bottom: -20px;
+}
+
+/* Wooden Rods */
+.scroll-roll::before,
+.scroll-roll::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 15px;
+  height: 15px;
+  background: var(--scroll-accent);
+  background-image: radial-gradient(
+    circle at 30% 30%,
+    var(--scroll-accent),
+    #000
+  );
+  border-radius: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.scroll-roll::before {
+  left: -10px;
+}
+.scroll-roll::after {
+  right: -10px;
+}
+
+/* Inner Border Frame */
+.campfire-parchment__inner-border {
+  position: absolute;
+  inset: 1.2rem;
+  border: 1px solid var(--scroll-inner-border);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.campfire-parchment__inner-border::before {
+  content: '❧';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(62, 39, 35, 0.3);
+  font-size: 1.2rem;
+}
+
+/* Wax Seal on Scroll */
+.campfire-parchment-scroll .wax-seal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  width: 38px;
+  height: 38px;
+  background: radial-gradient(circle at 30% 30%, var(--scroll-accent), #000);
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  transform: rotate(15deg);
+  transition: all 0.4s ease;
+}
+
+.wax-seal__logo {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+/* Straight Letters */
+.campfire-parchment-scroll:nth-child(even),
+.campfire-parchment-scroll:nth-child(odd) {
+  transform: none;
+}
+
+/* Hover Effects */
+.campfire-parchment-scroll:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.campfire-parchment-scroll:hover .wax-seal {
+  transform: rotate(0deg) scale(1.1);
+}
+
+/* Typography on Scroll */
+.campfire-parchment__header {
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  z-index: 1;
+}
+
+.campfire-parchment__date {
+  font-family: 'Special Elite', cursive;
+  font-size: 0.75rem;
+  color: var(--scroll-text);
+  opacity: 0.7;
+  display: block;
+}
+
+.campfire-parchment__tag {
+  font-family: 'Special Elite', cursive;
+  font-size: 0.65rem;
+  color: var(--scroll-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+
+.campfire-parchment__body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.8rem;
+  z-index: 1;
+}
+
+.campfire-parchment__title {
+  font-family: 'Efco Brookshire', Georgia, 'Times New Roman', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--scroll-text);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+.campfire-parchment-scroll:hover .campfire-parchment__title {
+  color: var(--scroll-accent);
+}
+
+.campfire-parchment__excerpt {
+  font-family: 'Special Elite', cursive;
+  font-size: 0.75rem;
+  color: var(--scroll-text);
+  opacity: 0.85;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.campfire-parchment__footer {
+  width: 100%;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.campfire-parchment__read {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--scroll-accent);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.campfire-parchment__time {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: 'Special Elite', cursive;
+  font-size: 0.6rem;
+  color: var(--scroll-text);
+  opacity: 0.7;
+}
+
+.campfire-parchment__arrow {
+  transition: transform 0.3s ease;
+}
+
+.campfire-parchment-scroll:hover .campfire-parchment__arrow {
+  transform: translateX(5px);
+}

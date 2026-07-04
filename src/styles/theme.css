@@ -1,0 +1,163 @@
+/* ===== RESET ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: 'Efco Brookshire';
+  src: url('../assets/EFCO-Brookshire-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --bg-color: #fdf5e6;
+  --text-main: #3e2723;
+  --text-dim: rgba(62, 39, 35, 0.7);
+  --accent-color: #d4a574;
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(166, 124, 82, 0.4);
+  --card-bg: rgba(255, 248, 225, 0.8);
+  --nav-bg: rgba(255, 255, 255, 0.3);
+  --shadow: rgba(62, 39, 35, 0.15);
+  --hero-text-fill: #3e2723;
+  --hero-text-stroke: rgba(62, 39, 35, 0.4);
+  --hero-accent-glow: rgba(212, 165, 116, 0.4);
+  --project-surface: #f6e4c7;
+  --project-surface-strong: #efe0bf;
+  --project-border: rgba(121, 83, 39, 0.3);
+  --project-border-strong: rgba(121, 83, 39, 0.62);
+  --project-title: #6d3f1d;
+  --project-text: #8b5c31;
+  --project-highlight: #5a3216;
+  --project-tag-bg: rgba(255, 248, 233, 0.9);
+  --project-tag-text: #8a5d28;
+  --project-shadow: rgba(92, 61, 35, 0.16);
+  --project-button-bg: #f2e1be;
+  --project-button-border: #b88f55;
+  --project-button-text: #7a4b1b;
+  --project-hover-surface: #ebd7ad;
+  --project-hover-border: #a5783e;
+  --oasis-green: #64dcc8;
+  --oasis-green-glow: rgba(100, 220, 200, 0.4);
+
+  --scroll-bg: #f5f5dc;
+  --scroll-roll-bg: #d4bc96;
+  --scroll-text: #3e2723;
+  --scroll-accent: #8b0000;
+  --scroll-border: #d2b48c;
+  --scroll-inner-border: rgba(62, 39, 35, 0.1);
+
+  scroll-behavior: smooth;
+  overscroll-behavior-y: contain;
+  scroll-snap-type: y mandatory;
+}
+
+/* Creative Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scroll-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scroll-accent);
+  border-radius: 4px;
+  border: 1px solid var(--scroll-border);
+}
+::-webkit-scrollbar-thumb:hover {
+  filter: brightness(1.2);
+}
+
+.dark-mode {
+  /* Dark Mode (Night Desert) - Enhanced Deep Night */
+  --bg-color: #05070a;
+  --text-main: #e0e6ed;
+  --text-dim: rgba(224, 230, 237, 0.7);
+  --accent-color: #6366f1;
+  --glass-bg: rgba(10, 15, 25, 0.6);
+  --glass-border: rgba(99, 102, 241, 0.3);
+  --card-bg: rgba(13, 18, 30, 0.5);
+  --nav-bg: rgba(5, 7, 10, 0.5);
+  --shadow: rgba(0, 0, 0, 0.8);
+  --hero-text-fill: #ffffff;
+  --hero-text-stroke: rgba(99, 102, 241, 0.5);
+  --hero-accent-glow: rgba(99, 102, 241, 0.6);
+  --project-surface: #2a1a10;
+  --project-surface-strong: #311f13;
+  --project-border: rgba(219, 171, 97, 0.24);
+  --project-border-strong: rgba(219, 171, 97, 0.48);
+  --project-title: #f4d6a2;
+  --project-text: #e1b373;
+  --project-highlight: #ffe0a9;
+  --project-tag-bg: rgba(12, 8, 4, 0.7);
+  --project-tag-text: #c7924c;
+  --project-shadow: rgba(0, 0, 0, 0.55);
+  --project-button-bg: #352213;
+  --project-button-border: rgba(219, 171, 97, 0.28);
+  --project-button-text: #f3d5a4;
+  --project-hover-surface: #3c2618;
+  --project-hover-border: rgba(219, 171, 97, 0.6);
+
+  /* Scroll Theme - High Contrast Night */
+  --scroll-bg: #0d0d0d;
+  --scroll-roll-bg: #1a1a1a;
+  --scroll-text: #1a150f;
+  --scroll-accent: #8b4513;
+  --scroll-border: rgba(139, 69, 19, 0.4);
+  --scroll-inner-border: rgba(139, 69, 19, 0.2);
+}
+body {
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  color: var(--text-main);
+  background: var(--bg-color);
+  overflow-x: hidden;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Smooth transitions for all theme-dependent properties */
+.hero-glass-box,
+.nav-container,
+.nav-link,
+.hero__intro,
+.hero__tagline,
+.hero__meta-item,
+.hero__meta-icon,
+.campfire-parchment,
+.sand-engraved-form,
+.road-sign-link,
+.desert-title,
+.desert-subtitle,
+.section-label {
+  transition:
+    background-color 0.4s ease-in-out,
+    border-color 0.4s ease-in-out,
+    color 0.4s ease-in-out,
+    box-shadow 0.4s ease-in-out,
+    backdrop-filter 0.4s ease-in-out,
+    opacity 0.4s ease-in-out,
+    transform 0.4s ease-in-out;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+
+/* ===== WORLD ===== */
