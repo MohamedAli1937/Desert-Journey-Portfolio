@@ -3,7 +3,6 @@ import contactDay from '../assets/contact-day.png';
 import contactNight from '../assets/contact-night.png';
 import contactDayFg from '../assets/conatct-day-bg.png';
 import contactNightFg from '../assets/contact-night-bg.png';
-import { FiMail, FiGithub, FiLinkedin, FiMessageSquare } from 'react-icons/fi';
 
 export default function Contact({
   isDarkMode,

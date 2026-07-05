@@ -1,16 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, type ReactNode } from 'react';
 import aboutDay from '../assets/about-day.png';
 import aboutNight from '../assets/about-night.png';
 import aboutDayFg from '../assets/about-day-bg.png';
 import aboutNightFg from '../assets/about-night-bg.png';
-import {
-  FiCpu,
-  FiActivity,
-  FiLink,
-  FiLayers,
-  FiBox,
-  FiDownload,
-} from 'react-icons/fi';
+import { FiBox, FiDownload } from 'react-icons/fi';
 import { FaAtom, FaRobot, FaBitcoin } from 'react-icons/fa';
 import { IoTerminal } from 'react-icons/io5';
 import resumePdf from '../assets/resume/Mohamed_Ali_CV.pdf';
@@ -47,11 +40,15 @@ export default function About({
     };
   }, []);
 
-  const disciplines = [
+  const disciplines: Array<{
+    icon: ReactNode;
+    title: string;
+    skills: string[];
+    isLocked?: boolean;
+  }> = [
     {
       icon: 'Σ',
       title: 'Mathematics',
-      // Added TDA to highlight your Market Risk Analyzer project
       skills: ['Linear Algebra', 'Calculus', 'Statistics', 'Topology & TDA'],
     },
     {
@@ -62,7 +59,6 @@ export default function About({
     {
       icon: <FaRobot />,
       title: 'AI & ML',
-      // Emphasized Computer Vision based on your Face and Sign Language detection projects
       skills: [
         'Computer Vision',
         'Deep Learning',
@@ -73,7 +69,6 @@ export default function About({
     {
       icon: <IoTerminal />,
       title: 'Software & Systems',
-      // Grouped your core languages and highlighted Full-Stack and Shell Dev (Cpp-Shell)
       skills: [
         'Python',
         'C++',
@@ -85,11 +80,15 @@ export default function About({
       ],
     },
     {
-      icon: <FaBitcoin />, // Consider changing this to <FaEthereum /> if you have it imported, given your Ethereum DApp!
+      icon: <FaBitcoin />,
       title: 'Blockchain',
-      // Tailored to match your Certificate-DApp project
       skills: ['Smart Contracts', 'Web3 / DApps', 'Ethereum', 'Solidity'],
     },
+  ];
+
+  const disciplineCards = [
+    ...disciplines,
+    { title: 'Locked 1', isLocked: true, icon: <FiBox />, skills: [] },
   ];
 
   const OasisCampfire = ({ onClick }: { onClick: () => void }) => (
@@ -208,26 +207,20 @@ export default function About({
             </div>
 
             <div className="disciplines-grid-3">
-              {[...disciplines, { title: 'Locked 1', isLocked: true }].map(
-                (d, idx) => (
-                  <div
-                    className={`oasis-rock-card-pill ${expandedCard === d.title ? 'active' : ''} ${d.isLocked ? 'oasis-rock-card-pill--locked' : ''}`}
-                    key={d.title || idx}
-                    onClick={() => !d.isLocked && setExpandedCard(d.title)}
-                  >
-                    <div className="oasis-rock-card__icon-mini">
-                      {d.isLocked ? (
-                        <FiBox style={{ opacity: 0.5 }} />
-                      ) : (
-                        (d as any).icon
-                      )}
-                    </div>
-                    <span className="oasis-rock-card__title-mini">
-                      {d.isLocked ? 'Unblocking...' : d.title}
-                    </span>
+              {disciplineCards.map((d, idx) => (
+                <div
+                  className={`oasis-rock-card-pill ${expandedCard === d.title ? 'active' : ''} ${d.isLocked ? 'oasis-rock-card-pill--locked' : ''}`}
+                  key={d.title || idx}
+                  onClick={() => !d.isLocked && setExpandedCard(d.title)}
+                >
+                  <div className="oasis-rock-card__icon-mini">
+                    {d.isLocked ? <FiBox style={{ opacity: 0.5 }} /> : d.icon}
                   </div>
-                )
-              )}
+                  <span className="oasis-rock-card__title-mini">
+                    {d.isLocked ? 'Unblocking...' : d.title}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
 

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import blogDay from '../assets/blog-day.png';
 import blogNight from '../assets/blog-night.png';
 import blogDayFg from '../assets/blog-day-bg.png';
@@ -33,7 +33,6 @@ export default function Blog({
   isDarkMode: boolean;
   toggleTheme: () => void;
 }) {
-  const [activeUrl, setActiveUrl] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -158,8 +157,6 @@ export default function Blog({
                   animationDelay: `${index * 0.15}s`,
                 } as any
               }
-              onMouseEnter={() => setActiveUrl(post.url)}
-              onMouseLeave={() => setActiveUrl(null)}
             >
               <div className="scroll-roll scroll-roll--top"></div>
               <div className="campfire-parchment__inner-border"></div>

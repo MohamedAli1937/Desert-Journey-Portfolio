@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FiMapPin, FiCpu, FiStar } from 'react-icons/fi';
+import { FiMapPin, FiCpu } from 'react-icons/fi';
 import heroDay from '../assets/hero-day.png';
 import heroNight from '../assets/hero-night.png';
 import heroDayFg from '../assets/hero-day-bg.png';
