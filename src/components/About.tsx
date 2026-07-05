@@ -3,9 +3,17 @@ import aboutDay from '../assets/about-day.png';
 import aboutNight from '../assets/about-night.png';
 import aboutDayFg from '../assets/about-day-bg.png';
 import aboutNightFg from '../assets/about-night-bg.png';
-import { FiCpu, FiActivity, FiLink, FiLayers, FiBox } from 'react-icons/fi';
+import {
+  FiCpu,
+  FiActivity,
+  FiLink,
+  FiLayers,
+  FiBox,
+  FiDownload,
+} from 'react-icons/fi';
 import { FaAtom, FaRobot, FaBitcoin } from 'react-icons/fa';
 import { IoTerminal } from 'react-icons/io5';
+import resumePdf from '../assets/resume/Mohamed_Ali_CV.pdf';
 
 export default function About({
   isDarkMode,
@@ -187,6 +195,16 @@ export default function About({
                 complex problems and have recently started exploring{' '}
                 <strong>Blockchain</strong>.
               </p>
+
+              <a
+                href={resumePdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="resume-action-btn"
+              >
+                <FiDownload />
+                <span>View Resume</span>
+              </a>
             </div>
 
             <div className="disciplines-grid-3">

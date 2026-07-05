@@ -54,6 +54,38 @@
   font-weight: 700;
 }
 
+.resume-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+  padding: 0.8rem 1.1rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent-color), #f0c27b);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  box-shadow: 0 12px 28px rgba(120, 84, 41, 0.2);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
+  width: fit-content;
+}
+
+.resume-action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(120, 84, 41, 0.28);
+  filter: brightness(1.04);
+}
+
+.dark-mode .resume-action-btn {
+  background: linear-gradient(135deg, var(--oasis-green), #7de1c8);
+  color: #06231f;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+}
+
 .dark-mode .oasis-intro-text strong {
   color: var(--oasis-green) !important;
   text-shadow: 0 0 15px var(--oasis-green-glow);
