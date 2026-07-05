@@ -14,26 +14,51 @@ export default function Contact({
 }) {
   const [pulseActive, setPulseActive] = useState(false);
   const [formData, setFormData] = useState({ name: '', message: '' });
-  const [status, setStatus] = useState<'idle' | 'sending' | 'success'>('idle');
+  const [status, setStatus] = useState<
+    'idle' | 'sending' | 'success' | 'error'
+  >('idle');
+  const formEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT;
 
   const triggerPulse = () => {
     setPulseActive(true);
     setTimeout(() => setPulseActive(false), 2000);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!formEndpoint) {
+      setStatus('error');
+      return;
+    }
+
     setStatus('sending');
     triggerPulse();
 
-    // Simulate sending delay
-    setTimeout(() => {
-      setStatus('success');
-      setFormData({ name: '', message: '' });
+    try {
+      const response = await fetch(formEndpoint, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          message: formData.message,
+        }),
+      });
 
-      // Reset status after 5 seconds
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', message: '' });
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch {
+      setStatus('error');
       setTimeout(() => setStatus('idle'), 5000);
-    }, 200);
+    }
   };
 
   const ContactCampfire = ({ onClick }: { onClick: () => void }) => (
@@ -157,6 +182,7 @@ export default function Contact({
                 {status === 'idle' && 'Ignite Beacon'}
                 {status === 'sending' && 'Igniting...'}
                 {status === 'success' && 'Beacon Lit!'}
+                {status === 'error' && 'Retry Beacon'}
               </span>
             </button>
           </form>
@@ -200,6 +226,10 @@ export default function Contact({
             <span style={{ color: '#ffcc66' }}>
               ✦ Beacon detected! I'll follow the light and get back to you soon.
               ✦
+            </span>
+          ) : status === 'error' ? (
+            <span style={{ color: '#ff8a80' }}>
+              ✦ The beacon flickered. Please try again in a moment. ✦
             </span>
           ) : (
             <>
